@@ -1,0 +1,50 @@
+﻿<Properties StartupConfiguration="{A10DBD4A-3252-40D5-888B-A8668A62FEA0}|Default">
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.Workbench ActiveDocument="PE/MauiProgram.cs">
+    <Files>
+      <File FileName="PE/MauiProgram.cs" Line="13" Column="10" />
+      <File FileName="PE/Implements/IRequest.cs" />
+      <File FileName="PE/Pages/Index.razor" Line="40" Column="29" />
+      <File FileName="PE/Pages/Counter.razor" />
+      <File FileName="PE/Services/Request.cs" />
+      <File FileName="PE/Models/DTOs/Usuario DTO.cs" />
+      <File FileName="PE/wwwroot/js/SweetAlert.js" />
+      <File FileName="PE/wwwroot/index.html" />
+      <File FileName="PE/_Imports.razor" />
+      <File FileName="PE/Models/Responses/Usuario.cs" />
+      <File FileName="PE/Models/DTOs/LoginDTO.cs" />
+      <File FileName="PE/Pages/FetchData.razor" />
+      <File FileName="PE/Platforms/Android/AndroidManifest.xml" />
+      <File FileName="PE/Platforms/Android/MainActivity.cs" />
+      <File FileName="PE/Platforms/Android/MainApplication.cs" />
+      <File FileName="PE/wwwroot/css/app.css" />
+      <File FileName="PE/wwwroot/css/bootstrap/bootstrap.min.css" Line="8" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Option id="ShowAllFiles" value="True" />
+          <Node name="PE" expanded="True" selected="True">
+            <Node name="PE" expanded="True">
+              <Node name="Implements" expanded="True" />
+              <Node name="Pages" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State name="__root__">
+          <Node name="PE" expanded="True" />
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.ItemProperties.PE PreferredExecutionTarget="Android.pixel_5_-_api_33_1" />
+  <Xamarin.Addins.Core.Project ActiveDebugTarget="Android.pixel_5_-_api_33_1" />
+  <MonoDevelop.MonoDroid LastDeploySdkVersion="33.0.46" />
+</Properties>

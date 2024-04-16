@@ -1,0 +1,145 @@
+﻿@page "/"
+@using PE.Services
+@using PE.Models.DTOs
+@using Newtonsoft.Json
+@using PE.Implements
+@using Newtonsoft.Json.Linq
+@using PE.Models.Responses
+@inject NavigationManager n 
+@inject IJSRuntime js
+@inject IRequest r
+
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="height: 100vh;">
+        <!-- Agregamos la clase align-items-center y especificamos una altura del 100% -->
+        <div class="col-md-6 col-lg-4 text-center">
+
+            <div class="mb-4">
+                <img src="/Src/Logo_Muni.png" class="rounded-circle img-fluid" alt="No se ha encontrado la imagen" style="max-width: 200px;">
+            </div>
+
+            <div class="form-group">
+                <label for="username  ">Username</label>
+                <input type="text" @bind-value="@email" class="form-control" id="username" placeholder="Enter username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" @bind-value="@password" class="form-control" id="password" placeholder="Enter password">
+            </div>
+
+            <button @onclick="Login" class="btn btn-primary btn-block">Login</button>
+
+        </div>
+    </div>
+</div>
+
+
+@code{
+    private string email;
+    private string password;
+
+    private async Task Login()
+    {
+
+        try
+
+        {
+
+            LoginDTO usuario = new LoginDTO();
+
+            usuario.email = this.email;
+            usuario.password = this.password;
+
+
+
+
+            var respuesta = await r.PostMethod("/user/login", null, usuario);
+
+
+            notificar(respuesta);
+
+        }
+        catch (Exception e)
+        {
+            js.InvokeVoidAsync("Swal.fire", e.Message);
+        }
+
+    }
+
+
+    private async Task notificar(HttpResponseMessage respuesta)
+    {
+        int codigo = (int)respuesta.StatusCode;
+        if (codigo >= 200 && codigo < 300)
+        {
+            try
+            {
+
+
+
+                bool init = await this.IniciarSesion(respuesta);
+                if (init == false)
+                {
+
+                    js.InvokeVoidAsync("Swal.fire", "Error al iniciar sesion");
+                }
+                else
+                {
+
+                    await js.InvokeVoidAsync("Swal.fire","Exito");
+                    n.NavigateTo("Counter");
+
+                }
+
+
+
+            }
+            catch(Exception e) {
+
+                await js.InvokeVoidAsync("Swal.fire",e.Message);
+
+            }
+
+
+        }
+        else
+        {
+
+            if (codigo >= 400)
+
+            {
+                await  js.InvokeVoidAsync("Swal.fire", "Usuario o contraseña invalida");
+
+            }
+
+        }
+
+    }
+
+
+
+    private async Task<bool> IniciarSesion(HttpResponseMessage response)
+    {
+        try
+        {
+            string data = await response.Content.ReadAsStringAsync();
+
+            LoginResponse r = JsonConvert.DeserializeObject<LoginResponse>(data); //Todo jala antes de guardas
+
+            await SecureStorage.Default.SetAsync("jwtToken",r.usuario.tokenDeAcceso);
+            string id = r.usuario.id.ToString();
+            await SecureStorage.Default.SetAsync("Id",id) ;
+            return true; // Inicio de sesión exitoso
+        }
+        catch (Exception ex)
+        {
+            throw new Exception(ex.Message);
+        }
+    }
+
+
+
+
+
+}
